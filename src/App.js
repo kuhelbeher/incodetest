@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Menu,
-  Input,
-  Grid,
-  Container,
-  Loader,
-  Image,
-  List,
-  Item,
-  Segment,
-} from 'semantic-ui-react';
+import { Menu, Input, Grid, Container, Loader } from 'semantic-ui-react';
 
+import ActiveClient from './components/ActiveClient/ActiveClient';
+import ClientItem from './components/ClientItem/ClientItem';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -34,111 +26,18 @@ class App extends Component {
     // when clients loaded render client list
     if (!clientsLoading) {
       clientsList = clients.map(client => (
-        <Menu.Item
-          key={client.contact.email}
-          name={client.contact.email}
-          active={
-            activeClient
-              ? activeClient.contact.email === client.contact.email
-              : false
-          }
-          onClick={() => onClientClick(client)}
-          style={{ display: 'flex' }}>
-          <Image
-            style={{ alignSelf: 'center', marginRight: '20px' }}
-            src={client.general.avatar}
-            size="tiny"
-            verticalAlign="middle"
-          />
-          <div>
-            <p>{`${client.general.firstName} ${client.general.lastName}`}</p>
-            <p>{client.job.title}</p>
-          </div>
-        </Menu.Item>
+        <ClientItem
+          client={client}
+          activeClient={activeClient}
+          onClientClick={onClientClick}
+        />
       ));
     }
 
     let activeItem = null;
 
     if (activeClient) {
-      activeItem = (
-        <Grid.Column mobile={16} computer={10}>
-          <Segment
-            size="big"
-            style={{ marginTop: '30px' }}
-            id={activeClient.contact.email}>
-            <Item.Group>
-              <Item>
-                <Item.Image src={activeClient.general.avatar} />
-                <Item.Content>
-                  <Item.Header>{`${activeClient.general.firstName} ${
-                    activeClient.general.lastName
-                  }`}</Item.Header>
-                  <Item.Description>
-                    {`${activeClient.job.title} in ${activeClient.job.company}`}
-                  </Item.Description>
-                  <Item.Extra>
-                    <List>
-                      <List.Header>Contact Data:</List.Header>
-                      <List.Item>
-                        <List.Icon name="at" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.contact.email}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                      <List.Item>
-                        <List.Icon name="phone" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.contact.phone}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                    </List>
-                    <List>
-                      <List.Header>Address:</List.Header>
-                      <List.Item>
-                        <List.Icon name="map marker alternate" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.address.street}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                      <List.Item>
-                        <List.Icon name="building" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.address.city}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                      <List.Item>
-                        <List.Icon name="envelope" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.address.zipCode}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                      <List.Item>
-                        <List.Icon name="flag" />
-                        <List.Content>
-                          <List.Description>
-                            {activeClient.address.country}
-                          </List.Description>
-                        </List.Content>
-                      </List.Item>
-                    </List>
-                  </Item.Extra>
-                </Item.Content>
-              </Item>
-            </Item.Group>
-          </Segment>
-        </Grid.Column>
-      );
+      activeItem = <ActiveClient activeClient={activeClient} />;
     }
 
     return (
