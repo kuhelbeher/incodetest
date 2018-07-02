@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import clientsReducer from './store/reducers/clients';
+import searchReducer from './store/reducers/search';
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers =
@@ -18,6 +19,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   clients: clientsReducer,
+  search: searchReducer,
 });
 
 const store = createStore(

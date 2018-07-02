@@ -3,7 +3,6 @@ import { Menu, Image } from 'semantic-ui-react';
 
 const ClientItem = ({ client, activeClient, onClientClick }) => (
   <Menu.Item
-    key={client.contact.email}
     name={client.contact.email}
     active={
       activeClient ? activeClient.contact.email === client.contact.email : false

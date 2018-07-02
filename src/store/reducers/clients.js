@@ -6,12 +6,12 @@ const initialState = {
   activeClient: null,
 };
 
-const fetchClientsStart = (state, action) => ({
+const fetchClientsStart = state => ({
   ...state,
   loading: true,
 });
 
-const fetchClientsFail = (state, action) => ({
+const fetchClientsFail = state => ({
   ...state,
   loading: false,
 });
@@ -30,9 +30,9 @@ const clientClick = (state, action) => ({
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_CLIENTS_START:
-      return fetchClientsStart(state, action);
+      return fetchClientsStart(state);
     case actionTypes.FETCH_CLIENTS_FAIL:
-      return fetchClientsFail(state, action);
+      return fetchClientsFail(state);
     case actionTypes.FETCH_CLIENTS_SUCCESS:
       return fetchClientsSuccess(state, action);
     case actionTypes.CLIENT_CLICK:
