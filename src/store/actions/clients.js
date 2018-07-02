@@ -26,3 +26,8 @@ export const fetchClients = () => dispatch => {
       dispatch(fetchClientsFail(error));
     });
 };
+
+export const clientClick = activeClient => ({
+  type: actionTypes.CLIENT_CLICK,
+  activeClient,
+});

@@ -1,1 +1,1 @@
-export { fetchClients } from './clients';
+export { fetchClients, clientClick } from './clients';

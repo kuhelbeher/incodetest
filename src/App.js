@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Menu, Input, Grid, Container, Loader } from 'semantic-ui-react';
+import { Menu, Input, Grid, Container, Loader, Image } from 'semantic-ui-react';
 
 import * as actions from './store/actions/index';
 
@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   render() {
-    const { clientsLoading, clients } = this.props;
+    const { clientsLoading, clients, onClientClick, activeClient } = this.props;
 
     let clientsList = (
       <Menu.Item style={{ height: '150px' }}>
@@ -21,7 +21,27 @@ class App extends Component {
 
     if (!clientsLoading) {
       clientsList = clients.map(client => (
-        <Menu.Item>{client.general.firstName}</Menu.Item>
+        <Menu.Item
+          key={client.contact.email}
+          name={client.contact.email}
+          active={
+            activeClient
+              ? activeClient.contact.email === client.contact.email
+              : false
+          }
+          onClick={() => onClientClick(client)}
+          style={{ display: 'flex' }}>
+          <Image
+            style={{ alignSelf: 'center', marginRight: '20px' }}
+            src={client.general.avatar}
+            size="tiny"
+            verticalAlign="middle"
+          />
+          <div>
+            <p>{`${client.general.firstName} ${client.general.lastName}`}</p>
+            <p>{client.job.title}</p>
+          </div>
+        </Menu.Item>
       ));
     }
 
@@ -45,10 +65,12 @@ class App extends Component {
 const mapStateToProps = state => ({
   clients: state.clients.clients,
   clientsLoading: state.clients.loading,
+  activeClient: state.clients.activeClient,
 });
 
 const mapDispatchToProps = dispatch => ({
   onFetchClients: () => dispatch(actions.fetchClients()),
+  onClientClick: activeClient => dispatch(actions.clientClick(activeClient)),
 });
 
 export default connect(
