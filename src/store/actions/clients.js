@@ -20,7 +20,7 @@ export const fetchClients = () => dispatch => {
   axios
     .get('/clients.json')
     .then(res => {
-      console.log(res);
+      dispatch(fetchClientsSuccess(res.data));
     })
     .catch(error => {
       dispatch(fetchClientsFail(error));
