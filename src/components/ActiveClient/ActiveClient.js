@@ -1,7 +1,14 @@
+// @flow
+
 import React from 'react';
 import { Grid, Segment, Item, List } from 'semantic-ui-react';
+import type { Client } from '../../flowtypes/types';
 
-const ActiveClient = ({ activeClient }) => (
+type Props = {
+  activeClient: Client,
+};
+
+const ActiveClient = ({ activeClient }: Props) => (
   <Grid.Column mobile={16} computer={10}>
     <Segment
       size="big"
@@ -15,7 +22,7 @@ const ActiveClient = ({ activeClient }) => (
               activeClient.general.lastName
             }`}</Item.Header>
             <Item.Description>
-              {`${activeClient.job.title} in ${activeClient.job.company}`}
+              {`${activeClient.job.title} - ${activeClient.job.company}`}
             </Item.Description>
             <Item.Extra>
               <List>

@@ -1,8 +1,18 @@
+// @flow
+
 import React from 'react';
 import { Menu, Image } from 'semantic-ui-react';
+import type { Client } from '../../flowtypes/types';
 
-const ClientItem = ({ client, activeClient, onClientClick }) => (
+type Props = {
+  client: Client,
+  activeClient: Client,
+  onClientClick: Function,
+};
+
+const ClientItem = ({ client, activeClient, onClientClick }: Props) => (
   <Menu.Item
+    href={`#${client.contact.email}`}
     name={client.contact.email}
     active={
       activeClient ? activeClient.contact.email === client.contact.email : false
