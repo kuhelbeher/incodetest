@@ -2,7 +2,12 @@
   "env": {
     "browser": true
   },
-  "extends": ["airbnb", "prettier", "prettier/flowtype", "prettier/react"],
+  "extends": [
+    "plugin:flowtype/recommended",
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "parser": "babel-eslint",
   "plugins": ["flowtype", "prettier"],
   "rules": {

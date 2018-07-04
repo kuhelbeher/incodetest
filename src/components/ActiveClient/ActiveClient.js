@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Grid, Segment, Item, List } from 'semantic-ui-react';
-import type { Client } from '../../flowtypes/types';
 
 type Props = {
   activeClient: Client,

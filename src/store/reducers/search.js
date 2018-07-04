@@ -2,24 +2,32 @@
 
 import * as actionTypes from '../actions/actionTypes';
 
+type State = {|
+  searchResults: Array<Client>,
+  searchValue: string,
+|};
+
 const initialState = {
   searchResults: [],
   searchValue: '',
 };
 
-const searchClientsSuccess = (state, action) => ({
+const searchClientsSuccess = (
+  state: State,
+  action: SearchClientsSuccessAction,
+) => ({
   ...state,
   searchValue: action.searchValue,
   searchResults: action.searchResults,
 });
 
-const searchClientsReset = state => ({
+const searchClientsReset = (state: State) => ({
   ...state,
   searchValue: '',
   searchResults: [],
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case actionTypes.SEARCH_CLIENTS_SUCCESS:
       return searchClientsSuccess(state, action);

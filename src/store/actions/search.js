@@ -1,7 +1,6 @@
 // @flow
 
 import * as actionTypes from './actionTypes';
-import type { Client } from '../../flowtypes/types';
 
 export const searchClientsReset = () => ({
   type: actionTypes.SEARCH_CLIENTS_RESET,
@@ -30,7 +29,7 @@ function getKeys(obj: Object, val: string) {
 }
 
 export const searchClients = (searchValue: string, clients: Array<Client>) => (
-  dispatch: Function,
+  dispatch: Dispatch,
 ) => {
   if (searchValue.length < 1) {
     dispatch(searchClientsReset());

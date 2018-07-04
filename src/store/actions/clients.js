@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import type { Client } from '../../flowtypes/types';
 
 export const fetchClientsStart = () => ({
   type: actionTypes.FETCH_CLIENTS_START,
@@ -18,7 +17,7 @@ export const fetchClientsSuccess = (clients: Array<Client>) => ({
   clients,
 });
 
-export const fetchClients = () => (dispatch: Function) => {
+export const fetchClients = () => (dispatch: Dispatch) => {
   dispatch(fetchClientsStart());
   axios
     .get('/clients.json')

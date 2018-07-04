@@ -2,34 +2,43 @@
 
 import * as actionTypes from '../actions/actionTypes';
 
+type State = {|
+  clients: Array<Client>,
+  loading: boolean,
+  activeClient: ?Client,
+|};
+
 const initialState = {
   clients: [],
   loading: false,
   activeClient: null,
 };
 
-const fetchClientsStart = state => ({
+const fetchClientsStart = (state: State) => ({
   ...state,
   loading: true,
 });
 
-const fetchClientsFail = state => ({
+const fetchClientsFail = (state: State) => ({
   ...state,
   loading: false,
 });
 
-const fetchClientsSuccess = (state, action) => ({
+const fetchClientsSuccess = (
+  state: State,
+  action: FetchClientSuccessAction,
+) => ({
   ...state,
   loading: false,
   clients: action.clients,
 });
 
-const clientClick = (state, action) => ({
+const clientClick = (state: State, action: ClientClickAction) => ({
   ...state,
   activeClient: action.activeClient,
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case actionTypes.FETCH_CLIENTS_START:
       return fetchClientsStart(state);

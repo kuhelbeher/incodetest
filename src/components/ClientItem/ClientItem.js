@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Menu, Image } from 'semantic-ui-react';
-import type { Client } from '../../flowtypes/types';
 
 type Props = {
   client: Client,

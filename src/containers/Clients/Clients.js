@@ -7,7 +7,6 @@ import { Menu, Input, Grid, Container, Loader } from 'semantic-ui-react';
 import ActiveClient from '../../components/ActiveClient/ActiveClient';
 import ClientItem from '../../components/ClientItem/ClientItem';
 import * as actions from '../../store/actions/index';
-import type { Client } from '../../flowtypes/types';
 
 type Props = {
   clientsLoading: boolean,
@@ -101,7 +100,7 @@ class Clients extends Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: GlobalState) => ({
   clients: state.clients.clients,
   clientsLoading: state.clients.loading,
   activeClient: state.clients.activeClient,
@@ -109,7 +108,7 @@ const mapStateToProps = state => ({
   searchResults: state.search.searchResults,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onFetchClients: () => dispatch(actions.fetchClients()),
   onClientClick: activeClient => dispatch(actions.clientClick(activeClient)),
   onSearchClients: (event, clients) =>
